@@ -1,0 +1,28 @@
+﻿@page "/whiteboard"
+@inject IJSRuntime JSRuntime;
+<button @onclick="createWhiteBoard">Create White Board</button>
+<button @onclick="copyWhiteBoard">Copy White Board</button>
+<button @onclick="putWhiteBoard">Put White Board</button>
+<button @onclick="clearWhiteBoard">Clear White Board</button>
+<div id="BoardSpace">
+
+</div>
+
+@code{
+	private async Task createWhiteBoard()
+	{
+		await JSRuntime.InvokeVoidAsync("createBoard", null);
+	}
+	private async Task copyWhiteBoard()
+	{
+		await JSRuntime.InvokeVoidAsync("copyImageData", null);
+	}
+	private async Task putWhiteBoard()
+	{
+		await JSRuntime.InvokeVoidAsync("putImage", null);
+	}
+	private async Task clearWhiteBoard()
+	{
+		await JSRuntime.InvokeVoidAsync("clearBoard", null);
+	}
+}

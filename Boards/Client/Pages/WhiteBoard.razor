@@ -1,9 +1,12 @@
 ﻿@page "/whiteboard"
 @inject IJSRuntime JSRuntime;
+@using System.Net.Http;
+@inject HttpClient Http;
 <button @onclick="createWhiteBoard">Create White Board</button>
 <button @onclick="copyWhiteBoard">Copy White Board</button>
 <button @onclick="putWhiteBoard">Put White Board</button>
 <button @onclick="clearWhiteBoard">Clear White Board</button>
+<button @onclick="postWhiteBoard">Post White Board</button>
 <div id="BoardSpace">
 
 </div>
@@ -24,5 +27,19 @@
 	private async Task clearWhiteBoard()
 	{
 		await JSRuntime.InvokeVoidAsync("clearBoard", null);
+	}
+	private async Task postWhiteBoard()
+	{
+		try
+		{
+			var data = await JSRuntime.InvokeAsync<string>("getImageData", null);
+			Boards.Shared.Models.DTO.BoardDTO dto = new Boards.Shared.Models.DTO.BoardDTO();
+			dto.bytes = data;
+			await Http.PostAsJsonAsync("SaveBoardData", dto.bytes);
+		}
+		catch(Exception ex)
+		{
+			throw ex;
+		}
 	}
 }

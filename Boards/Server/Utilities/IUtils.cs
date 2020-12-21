@@ -1,4 +1,4 @@
-﻿using Boards.Server.Models.DTO;
+﻿using Boards.Shared.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,6 @@ namespace Boards.Server.Utilities
 {
 	public interface IUtils
 	{
-		Guid SaveBoard(BoardDTO dto);
+		string SaveBoard(BoardDTO dto);
 	}
 }

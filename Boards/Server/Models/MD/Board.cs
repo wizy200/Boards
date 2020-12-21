@@ -12,7 +12,7 @@ namespace Boards.Server.Models.MD
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; set; }
-		public Byte[] bytes { get; set; }
+		public string bytes { get; set; }
 		
 	}
 }

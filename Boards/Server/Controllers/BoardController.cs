@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Boards.Server.Models.DTO;
+using Boards.Shared.Models.DTO;
 using Boards.Server.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Boards.Server.Models.MD;
 
 namespace Boards.Server.Controllers
 {
@@ -20,10 +21,12 @@ namespace Boards.Server.Controllers
 			return View();
 		}
 		[HttpGet("SaveBoardData/{img}")]
-		public IActionResult SaveBoardData(BoardDTO dto)
+		public IActionResult SaveBoardData(string img)
 		{
-			_utils.SaveBoard(dto);
-			return Ok();
+			BoardDTO dto = new BoardDTO();
+			dto.bytes = img;
+			var result =_utils.SaveBoard(dto);
+			return Ok(result);
 		}
 	}
 }

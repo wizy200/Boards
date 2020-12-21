@@ -23,5 +23,14 @@ namespace Boards.Server.Services
 		{
 			return _board.Find(board => true).ToList();
 		}
+		public Board create(Board board)
+		{
+			_board.InsertOne(board);
+			return board;
+		}
+		public void Update(string id, Board board)
+		{
+			_board.ReplaceOne(b => b.Id == id, board);
+		}
 	}
 }

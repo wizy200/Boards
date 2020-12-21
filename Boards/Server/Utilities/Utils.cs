@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Boards.Server.Models.DTO;
+using Boards.Shared.Models.DTO;
+using Boards.Server.Models.MD;
 using Boards.Server.Services;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -16,11 +17,13 @@ namespace Boards.Server.Utilities
 		{
 			_boardService = boardService;
 		}
-		public Guid SaveBoard(BoardDTO dto)
+		public string SaveBoard(BoardDTO dto)
 		{
 
 			var test = _boardService.Get();
-			throw new NotImplementedException();
+			Board board = new Board() { bytes = dto.bytes };
+			var result = _boardService.create(board);
+			return result.Id;
 		}
 	}
 }

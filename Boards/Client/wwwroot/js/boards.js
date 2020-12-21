@@ -70,3 +70,7 @@ function putImage(){
 	var ctx = c.getContext("2d");
 	ctx.putImageData(imageData, 0, 0);
 }
+function getImageData() { 
+	var dat = JSON.stringify(imageData);
+	return dat;
+}
